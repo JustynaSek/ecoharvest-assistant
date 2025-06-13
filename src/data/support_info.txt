@@ -1,0 +1,150 @@
+### SECTION: TROUBLESHOOTING - DEVICE ###
+**Issue: GrowPod not powering on.**
+- Check if the power adapter is securely plugged into the GrowPod and a working wall outlet.
+- Ensure the outlet has power (test with another device).
+- Try resetting the GrowPod by unplugging it for 30 seconds and plugging it back in.
+- If issues persist, contact support.
+
+**Issue: App cannot connect to GrowPod (Wi-Fi issue).**
+- Ensure your phone is on a 2.4GHz Wi-Fi network during setup.
+- Restart your home router.
+- Try moving the GrowPod closer to your Wi-Fi router.
+- Ensure the GrowPod is in pairing mode (blinking blue light).
+- Reinstall the EcoHarvest App.
+
+**Issue: Water pump not working.**
+- Check if the water pump cable is properly connected inside the water tank.
+- Ensure the water level is above the minimum mark.
+- Clean the pump filter for any debris.
+- If it's still not pumping, the pump might need replacement. Contact support.
+
+**Issue: LED grow lights not turning on.**
+- Verify the power connection.
+- Check the light schedule in the EcoHarvest App. It might be set to OFF or a very short cycle.
+- Ensure the light arm is properly seated in its slot.
+- If specific LEDs are out, the light panel might be faulty.
+
+### SECTION: TROUBLESHOOTING - PLANTS ###
+**Problem: Plants are wilting or yellowing.**
+- **Wilting:** Could be underwatering (check app water level), overwatering (soil/media too soggy - less likely in hydroponics but check pump settings), or nutrient deficiency.
+- **Yellowing:** Often a sign of nutrient deficiency or incorrect pH. Ensure you've added the correct amount of nutrients. Check water pH.
+- Refer to the plant-specific guides in the EcoHarvest App for ideal conditions.
+
+**Problem: Algae growth in water tank.**
+- Algae usually indicates too much light reaching the water. Ensure the water tank lid is sealed properly and no direct sunlight is hitting the water.
+- Clean the tank thoroughly with a mild solution (e.g., diluted hydrogen peroxide) during a nutrient change.
+- Cover any exposed areas of water or growing medium.
+
+**Problem: Pest infestation (small flies, aphids).**
+- Immediately isolate the infected GrowPod from other plants.
+- For small flies (fungus gnats), reduce humidity and ensure the growing medium surface dries slightly. Yellow sticky traps can help.
+- For aphids, gently wipe them off with a damp cloth or use a mild insecticidal soap solution.
+- Always identify the pest first to apply appropriate treatment.
+
+### SECTION: GENERAL MAINTENANCE ###
+- **Nutrient Refill:** Add nutrients every 2 weeks or as prompted by the app.
+- **Water Changes:** Replace all water in the tank every 2-4 weeks to prevent nutrient imbalance and algae.
+- **Cleaning:** Clean the water tank and pump regularly (e.g., every 1-2 months) with mild soap and water.
+
+### SECTION: SIMULATED BILLING/SUBSCRIPTION ISSUES ###
+**Query: I was charged twice this month.**
+- Please provide your customer ID or the email associated with your account. We can then review your transaction history and correct any double charges.
+- **Typical resolution:** Confirm double charge, initiate refund for one charge, send confirmation.
+
+**Query: How do I cancel my Premium app subscription?**
+- You can cancel your subscription directly through the EcoHarvest App settings under "Subscription Management."
+- For iOS: Go to App Store > Your Profile > Subscriptions.
+- For Android: Go to Play Store > Menu > Payments & subscriptions > Subscriptions.
+- Alternatively, you can manage it from our website's account portal.
+- **Cancellation Policy:** Subscriptions cancel at the end of the current billing period. No refunds for partial months.
+
+**Query: My seed pod subscription didn't arrive.**
+- Please provide your subscription ID or order number. We will track your shipment and if lost, arrange for a replacement.
+- **Resolution:** Verify address, track shipment, offer re-shipment or refund.
+
+### SECTION: TROUBLESHOOTING - SPECIFIC PLANT PROBLEMS ###
+**Problem: Leaves have brown spots or burnt edges.**
+- **Cause:** Could be nutrient burn (too much nutrient concentration), light burn (lights too close to plants), or sometimes a fungal issue if humidity is too high.
+- **Solution:** Reduce nutrient concentration, raise grow lights, ensure proper ventilation. Identify the exact issue to apply the right fix.
+
+**Problem: Plants not germinating.**
+- **Cause:** Old seeds, improper temperature (too cold), insufficient moisture, or burying seeds too deep.
+- **Solution:** Ensure room temperature is between 65-75°F (18-24°C). Keep germination domes on. Try new seed pods. Make sure pods are fully saturated.
+
+**Problem: Water smells bad or looks cloudy.**
+- **Cause:** Algae growth, stagnant water, or bacterial contamination.
+- **Solution:** Perform an immediate full water change. Clean the water tank thoroughly with a diluted bleach solution (1 part bleach to 10 parts water), rinse extensively. Ensure no light is reaching the water. Maintain regular water changes every 2-4 weeks.
+
+### SECTION: ACCOUNT AND SUBSCRIPTION MANAGEMENT ###
+**Query: How do I update my payment method?**
+- You can update your payment method for app subscriptions directly within the EcoHarvest App under "Account Settings" -> "Subscription Management" -> "Payment Methods."
+- For seed pod subscriptions, log into your account on our website, go to "My Subscriptions" and update your payment details there.
+
+**Query: I forgot my password.**
+- On the EcoHarvest App login screen, tap "Forgot Password." Enter your registered email address, and we'll send you a password reset link.
+- On the website, click "Login" then "Forgot Password" to reset your password.
+
+**Query: Can I pause my subscription instead of canceling?**
+- Currently, we do not offer a pause option for app subscriptions. You would need to cancel and resubscribe when you're ready.
+- For seed pod subscriptions, you can adjust the delivery frequency (e.g., from monthly to quarterly) in your account settings on our website.
+
+### SECTION: ADVANCED TROUBLESHOOTING / ESCALATION ###
+**Issue: Device firmware update failed.**
+- If a firmware update fails repeatedly, try a hard reset (unplug for 1 minute). Ensure a stable Wi-Fi connection during the update process. If the issue persists, this may require advanced troubleshooting by our technical team. Please provide your GrowPod's serial number.
+
+**Issue: Specific sensor readings are incorrect or stuck.**
+- If you suspect a sensor is faulty (e.g., water level always shows full despite being empty), first clean the sensor area if accessible. Perform a full system reset. If the readings are still erratic, the unit may require diagnostics. This is typically an issue that needs to be escalated for in-depth technical support.
+
+### SECTION: CONTACTING HUMAN SUPPORT ###
+For issues that cannot be resolved by the agent, or for complex inquiries requiring human expertise (e.g., bespoke solutions, specific account investigations beyond simple queries, warranty claims needing human review), you will be directed to our human support team.
+- **Email:** support@ecoharvest.com (response within 24-48 hours)
+- **Live Chat:** Available on our website during business hours (Monday-Friday, 9 AM - 5 PM EST).
+- **Phone:** 1-800-ECO-GROW (for urgent technical issues, available during business hours).
+Please provide your customer ID and a summary of your issue when contacting us for faster service.
+
+### SECTION: ADVANCED TROUBLESHOOTING - LIGHTS & SENSORS ###
+**Issue: GrowPod lights are dim or flickering.**
+- **Cause:** This might indicate an issue with the LED panel, power supply, or a loose connection.
+- **Solution:** First, ensure power adapter is securely plugged in. Check the app for any error notifications or light schedule settings. Try performing a GrowPod reset (unplug for 30 seconds). If flickering persists, it might require a replacement light panel.
+
+**Issue: Nutrient sensor reading seems inaccurate.**
+- **Cause:** Sensor fouling (algae/mineral buildup), air bubbles on the sensor, or a faulty sensor.
+- **Solution:** Remove the sensor (if accessible) and gently clean it with a soft brush and clean water. Ensure there are no air bubbles trapped on the sensor when reinserted. Perform a full water change and re-calibrate if your model supports it. If problem persists, the sensor may need replacement.
+
+### SECTION: TROUBLESHOOTING - GROWING MEDIA ###
+**Problem: Seed pod is moldy or fuzzy.**
+- **Cause:** Usually white, fuzzy mold is harmless beneficial fungi or root hairs. If it's grey, black, or smells bad, it could be harmful mold due to excessive humidity or poor air circulation.
+- **Solution:** For harmless mold, ensure good air circulation (gentle fan nearby). For harmful mold, remove the affected pod immediately to prevent spread and increase ventilation. You may need to discard the pod.
+
+**Problem: Roots are brown and slimy.**
+- **Cause:** This is a strong indicator of root rot, often caused by overwatering, insufficient oxygen in the water, or bacterial/fungal infection in the reservoir.
+- **Solution:** Immediately perform a full water change and thoroughly clean the water reservoir, pump, and tubes with a diluted hydrogen peroxide solution (3% food-grade). Trim off any brown, slimy roots. Ensure air stone (if applicable) is working to oxygenate water.
+
+### SECTION: BILLING & ACCOUNT MANAGEMENT (Advanced) ###
+**Query: I want to upgrade my app subscription.**
+- You can upgrade your app subscription at any time via the EcoHarvest App's "Subscription Management" section or through our website's account portal. The upgrade will take effect immediately, and your billing will be prorated for the current cycle.
+- **Process:** Navigate to subscription, select new plan, confirm payment.
+
+**Query: Why was my payment declined?**
+- Payment declines can happen for several reasons:
+    - **Insufficient Funds:** Check your account balance.
+    - **Incorrect Card Details:** Verify card number, expiry date, and CVV.
+    - **Bank Fraud Protection:** Your bank might have flagged the transaction. Contact your bank directly.
+    - **Expired Card:** Ensure your card is still valid.
+- Please try another payment method or contact your bank.
+
+**Query: Can I get a refund for used seed pods?**
+- Unfortunately, we cannot offer refunds for used or opened seed pods due to hygiene and quality control reasons. Refunds are only applicable to unopened and unused seed pod packs returned within our 30-day return policy.
+
+### SECTION: PRODUCT REPAIRS AND REPLACEMENTS ###
+**Warranty Claims:**
+- To initiate a warranty claim for a defective GrowPod within the 1-year limited warranty period, please contact our support team with your proof of purchase (order number or receipt) and a detailed description of the issue. We may request photos or videos.
+- If deemed a manufacturing defect, we will arrange for repair or replacement of the affected component or the entire unit.
+
+**Out-of-Warranty Repairs:**
+- For GrowPods outside the warranty period, we offer repair services for common components (e.g., LED lights, pumps) at a flat service fee plus the cost of parts. Contact support for a quote.
+
+### SECTION: DATA PRIVACY & SECURITY ###
+**User Data Collection:** We collect data related to your GrowPod's performance (sensor readings, light cycles), app usage, and anonymous plant growth data to improve our services and provide personalized recommendations.
+**Personal Data Protection:** Your personal information (email, payment details) is encrypted and stored securely. We adhere to strict data protection regulations (e.g., GDPR, CCPA). We do not sell your personal data to third parties.
+**Data Access:** You can request access to your personal data or request data deletion through your account settings or by contacting privacy@ecoharvest.com.
