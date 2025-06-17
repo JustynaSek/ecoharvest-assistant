@@ -1,4 +1,3 @@
-# src/tools.py
 import requests
 import os
 from dotenv import load_dotenv
@@ -8,7 +7,6 @@ load_dotenv(override=True)
 # --- General Utility Tool (Pushover) ---
 def push(text):
     """Sends a notification to Pushover."""
-    # Ensure PUSHOVER_TOKEN and PUSHOVER_USER are set in your .env
     token = os.getenv("PUSHOVER_TOKEN")
     user = os.getenv("PUSHOVER_USER")
     if not token or not user:

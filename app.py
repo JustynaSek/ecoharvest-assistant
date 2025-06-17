@@ -1,90 +1,202 @@
-import os
 import gradio as gr
-from dotenv import load_dotenv
+import asyncio
+from datetime import datetime
+import os
 import gdown
-from src.my_agents.triage_agent.triage_agent import triage_agent
-from src.my_agents.context import UserContext, UserRole
+from dotenv import load_dotenv
+import logging
 
-# Load environment variables
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+from src.my_agents.triage_agent.triage_agent import triage_agent
+from src.my_agents.product_info_agent.product_info_agent_tools import _initialize_product_rag_components
+from src.my_agents.support_info_agent.support_info_agent_tools import _initialize_support_rag_components
+
+from agents import Runner, trace, InputGuardrailTripwireTriggered
+
 load_dotenv()
+
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
+if not os.getenv("OPENAI_API_KEY"):
+    raise ValueError("OPENAI_API_KEY environment variable is not set. Please set it in Hugging Face Spaces secrets.")
 
 def download_database_files():
     """Download database files from Google Drive if they don't exist."""
-    # Create directories if they don't exist
-    os.makedirs("src/chroma_dbs/product_info_db", exist_ok=True)
-    os.makedirs("src/chroma_dbs/support_info_db", exist_ok=True)
+    
+    print(f"\nCurrent working directory: {os.getcwd()}")
+  
+    product_db_dir = "src/chroma_dbs/product_info_db"
+    support_db_dir = "src/chroma_dbs/support_info_db"
+    
+    print(f"\nCreating directories:")
+    print(f"Product DB directory: {os.path.abspath(product_db_dir)}")
+    print(f"Support DB directory: {os.path.abspath(support_db_dir)}")
+    
+    os.makedirs(product_db_dir, exist_ok=True)
+    os.makedirs(support_db_dir, exist_ok=True)
 
-    # Product Info DB file
     product_db_file = {
         "chroma.sqlite3": "1kNEJQswOZuLnZGGIHTSfKBrQHB-vB7S_"
     }
 
-    # Support Info DB file
+
     support_db_file = {
         "chroma.sqlite3": "17ZfKQxuQyN1s3zJ_Fn3RTVQv32A7e1v3"
     }
 
-    # Download Product Info DB file
     for filename, file_id in product_db_file.items():
-        dest_path = f"src/chroma_dbs/product_info_db/{filename}"
-        if not os.path.exists(dest_path):
-            print(f"Downloading product info DB file: {filename}")
-            url = f'https://drive.google.com/uc?id={file_id}'
-            gdown.download(url, dest_path, quiet=False)
-            print(f"Downloaded {filename}")
-
-    # Download Support Info DB file
-    for filename, file_id in support_db_file.items():
-        dest_path = f"src/chroma_dbs/support_info_db/{filename}"
-        if not os.path.exists(dest_path):
-            print(f"Downloading support info DB file: {filename}")
-            url = f'https://drive.google.com/uc?id={file_id}'
-            gdown.download(url, dest_path, quiet=False)
-            print(f"Downloaded {filename}")
-
-# Download database files before initializing the agent
-download_database_files()
-
-# Initialize the agent
-agent = triage_agent
-
-def process_message(message, user_name, user_role):
-    """Process user message and return response."""
-    # Create user context
-    context = UserContext(
-        user_name=user_name,
-        role=UserRole[user_role.upper()],
-        is_first_interaction=True  # You might want to implement persistence for this
-    )
-    
-    # Process the message
-    response = agent.run(message, context)
-    return response
-
-# Create the Gradio interface
-with gr.Blocks() as demo:
-    gr.Markdown("# EcoHarvest Assistant")
-    
-    with gr.Row():
-        with gr.Column():
-            message = gr.Textbox(label="Your Message", placeholder="Type your message here...")
-            user_name = gr.Textbox(label="Your Name", placeholder="Enter your name...")
-            user_role = gr.Dropdown(
-                choices=["CHAT_USER", "ADMIN", "DEVELOPER", "SUPPORT", "SALES"],
-                label="Your Role",
-                value="CHAT_USER"
-            )
-            submit_btn = gr.Button("Send")
+        dest_path = os.path.join(product_db_dir, filename)
+        print(f"\nChecking Product DB file:")
+        print(f"Destination path: {os.path.abspath(dest_path)}")
+        print(f"File exists: {os.path.exists(dest_path)}")
         
-        with gr.Column():
-            output = gr.Textbox(label="Response")
-    
-    submit_btn.click(
-        fn=process_message,
-        inputs=[message, user_name, user_role],
-        outputs=output
-    )
+        if not os.path.exists(dest_path):
+            print(f"\nDownloading product info DB file:")
+            print(f"File: {filename}")
+            print(f"From: https://drive.google.com/uc?id={file_id}")
+            print(f"To: {os.path.abspath(dest_path)}")
+            
+            url = f'https://drive.google.com/uc?id={file_id}'
+            gdown.download(url, dest_path, quiet=False)
+            
+            print(f"\nDownload complete:")
+            print(f"File exists: {os.path.exists(dest_path)}")
+            print(f"File size: {os.path.getsize(dest_path) if os.path.exists(dest_path) else 'N/A'} bytes")
 
-# Launch the app
+    for filename, file_id in support_db_file.items():
+        dest_path = os.path.join(support_db_dir, filename)
+        print(f"\nChecking Support DB file:")
+        print(f"Destination path: {os.path.abspath(dest_path)}")
+        print(f"File exists: {os.path.exists(dest_path)}")
+        
+        if not os.path.exists(dest_path):
+            print(f"\nDownloading support info DB file:")
+            print(f"File: {filename}")
+            print(f"From: https://drive.google.com/uc?id={file_id}")
+            print(f"To: {os.path.abspath(dest_path)}")
+            
+            url = f'https://drive.google.com/uc?id={file_id}'
+            gdown.download(url, dest_path, quiet=False)
+            
+            print(f"\nDownload complete:")
+            print(f"File exists: {os.path.exists(dest_path)}")
+            print(f"File size: {os.path.getsize(dest_path) if os.path.exists(dest_path) else 'N/A'} bytes")
+
+
+print("\n=== Starting Database Download Process ===")
+download_database_files()
+print("=== Database Download Process Complete ===\n")
+
+try:
+    print("\n=== Starting Database Initialization ===")
+    _initialize_product_rag_components()
+    _initialize_support_rag_components()
+    print("=== Database Initialization Complete ===\n")
+except Exception as e:
+    print(f"\nERROR: Failed to initialize database: {e}")
+    raise
+
+async def process_query(message: str, history: list) -> tuple:
+    """
+    Process user query through the triage agent system.
+    
+    Args:
+        message: The user's message
+        history: The chat history
+    
+    Returns:
+        tuple: (empty string, updated history)
+    """
+    try:
+        # Run through triage agent which will handle routing to appropriate agent
+        with trace("Triage Agent Test") as tracer:
+            result = await Runner.run(triage_agent, message)
+        
+        response = result.final_output
+        
+        history.append((message, response))
+        return "", history
+    except InputGuardrailTripwireTriggered as e:
+        logger.warning(f"Input guardrail triggered: {e}")
+        history.append((message, "I apologize, but I cannot process that request."))
+        return "", history
+    except Exception as e:
+        logger.error(f"Error processing query: {e}")
+        error_message = f"An error occurred: {str(e)}"
+        history.append((message, error_message))
+        return "", history
+
+def create_interface():
+    """
+    Create and configure the Gradio interface.
+    """
+    with gr.Blocks(title="EcoHarvest AI Assistant", theme=gr.themes.Soft()) as demo:
+        gr.Markdown("""
+        # 🌱 EcoHarvest AI Assistant
+        
+        Welcome to the EcoHarvest AI Assistant! I can help you with:
+        - Product information and features
+        - Technical support and troubleshooting
+        - Account notifications and alerts
+        
+        How can I assist you today?
+        """)
+        
+        with gr.Row():
+            with gr.Column(scale=4):
+                chatbot = gr.Chatbot(
+                    height=600,
+                    show_copy_button=True,
+                    show_share_button=True,
+                    bubble_full_width=False,
+                    elem_id="chatbot"
+                )
+                
+                with gr.Row():
+                    msg = gr.Textbox(
+                        placeholder="Type your message here...",
+                        show_label=False,
+                        container=False,
+                        scale=8
+                    )
+                    submit = gr.Button("Send", variant="primary", scale=1)
+                
+                with gr.Row():
+                    clear = gr.Button("Clear Chat")
+            
+            with gr.Column(scale=1):
+                gr.Markdown("""
+                ### Quick Links
+                - [Product Documentation](https://ecoharvest.com/docs)
+                - [Support Portal](https://ecoharvest.com/support)
+                - [Account Settings](https://ecoharvest.com/account)
+                """)
+        
+        # Event handlers
+        submit.click(
+            process_query,
+            inputs=[msg, chatbot],
+            outputs=[msg, chatbot],
+            api_name="chat"
+        )
+        
+        msg.submit(
+            process_query,
+            inputs=[msg, chatbot],
+            outputs=[msg, chatbot],
+            api_name="chat"
+        )
+        
+        clear.click(lambda: None, None, chatbot, queue=False)
+    
+    return demo
+
 if __name__ == "__main__":
-    demo.launch() 
+    demo = create_interface()
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=7860,
+        share=True,
+        debug=True
+    ) 

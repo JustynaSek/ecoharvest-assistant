@@ -13,7 +13,7 @@ IMPORTANT RULES:
 """
 
 notification_agent = Agent(
-    name="Email Manager",
+    name="Notofication Manager",
     instructions=instructions,
     tools=[notification_tool],
     model="gpt-4o-mini",
