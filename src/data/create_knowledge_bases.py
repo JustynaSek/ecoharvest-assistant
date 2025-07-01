@@ -3,21 +3,29 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 from typing import List, Dict
 
+# --- Configuration ---
+# Directory where the text files are located
 DATA_DIR = "data"
 
+# Paths to your input text files
 PRODUCT_INFO_FILE = os.path.join(DATA_DIR, "product_info.txt")
 SUPPORT_INFO_FILE = os.path.join(DATA_DIR, "support_info.txt")
 
+# Directory where Chroma DBs will be stored
 CHROMA_DB_BASE_PATH = "chroma_dbs"
 PRODUCT_CHROMA_PATH = os.path.join(CHROMA_DB_BASE_PATH, "product_info_db")
 SUPPORT_CHROMA_PATH = os.path.join(CHROMA_DB_BASE_PATH, "support_info_db")
 
+# Collection names within each Chroma DB
 PRODUCT_COLLECTION_NAME = "product_info_collection"
 SUPPORT_COLLECTION_NAME = "support_info_collection"
 
 # Embedding model to use. 'all-MiniLM-L6-v2' is a good balance of size/performance.
 EMBEDDING_MODEL_NAME = 'all-MiniLM-L6-v2'
 
+# --- Chunking Parameters ---
+# We'll split by section headers (### SECTION: ... ###) and then by paragraphs.
+# This approach leverages your data's existing structure for semantic chunking.
 SECTION_DELIMITER = "### SECTION:"
 PARAGRAPH_DELIMITER = "\n\n" # Primary split within sections
 
@@ -60,6 +68,8 @@ def load_and_chunk_data(file_path: str) -> List[Dict[str, str]]:
                  continue
 
             for i, paragraph in enumerate(paragraphs):
+                # You could further split very long paragraphs here if needed
+                # For now, each paragraph is a chunk.
                 chunks_with_metadata.append({
                     "content": paragraph,
                     "metadata": {
@@ -86,6 +96,10 @@ def create_chroma_db(chunks: List[Dict[str, str]], db_path: str, collection_name
     client = chromadb.PersistentClient(path=db_path)
     collection = client.get_or_create_collection(name=collection_name)
     
+    # Clear existing data in the collection if you want to rebuild it every time
+    # collection.delete(ids=[id_ for id_ in collection.get()['ids']]) # Dangerous if you have other data!
+    # A safer approach for full rebuilds is to delete the whole directory before running the script.
+    
     documents = [c['content'] for c in chunks]
     metadatas = [c['metadata'] for c in chunks]
     ids = [f"{collection_name}_{i}" for i in range(len(chunks))]
@@ -104,12 +118,14 @@ def create_chroma_db(chunks: List[Dict[str, str]], db_path: str, collection_name
     print(f"Successfully added {len(documents)} documents to '{collection_name}'.")
 
 if __name__ == "__main__":
+    # Create the data directory if it doesn't exist (for where you put your .txt files)
     os.makedirs(DATA_DIR, exist_ok=True)
     
     print("Loading embedding model...")
     embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
     print("Embedding model loaded.")
 
+    # --- Process Product Info ---
     product_chunks = load_and_chunk_data(PRODUCT_INFO_FILE)
     if product_chunks:
         create_chroma_db(product_chunks, PRODUCT_CHROMA_PATH, PRODUCT_COLLECTION_NAME, embedding_model)
@@ -118,6 +134,7 @@ if __name__ == "__main__":
 
     print("-" * 50)
 
+    # --- Process Support Info ---
     support_chunks = load_and_chunk_data(SUPPORT_INFO_FILE)
     if support_chunks:
         create_chroma_db(support_chunks, SUPPORT_CHROMA_PATH, SUPPORT_COLLECTION_NAME, embedding_model)

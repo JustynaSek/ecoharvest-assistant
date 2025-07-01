@@ -1,8 +1,10 @@
+# src/agents/support_info_agent.py
 from pydantic import BaseModel
 from agents import Agent, function_tool, input_guardrail, GuardrailFunctionOutput, RunContextWrapper, Runner, InputGuardrailTripwireTriggered
 
+# Import the specific tools for this agent
 from .support_info_agent_tools import query_support_knowledge_base_tool, SupportKnowledgeQueryInput
-from .support_info_guardrail import question_guardrail
+from ..shared.guardrails import universal_guardrail
 
 @function_tool
 def _query_support_knowledge_base(query: str) -> str:
@@ -26,5 +28,5 @@ supportInfoAgent = Agent(
     instructions=instructions,
     tools=[_query_support_knowledge_base],
     model="gpt-4o-mini",
-    input_guardrails=[question_guardrail]
+    input_guardrails=[universal_guardrail]
 ) 

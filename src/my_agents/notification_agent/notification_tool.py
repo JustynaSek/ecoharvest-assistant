@@ -14,6 +14,10 @@ def create_and_send_welcome_message(name: str) -> Dict[str, Any]:
     """
     welcome_message = f"Welcome {name}! We're excited to have you join our community. We hope you'll find everything you need here."
     
+    # Mock sending the message
+    print(f"[MOCK] Sending welcome message to {name}")
+    print(f"[MOCK] Message content: {welcome_message}")
+    
     return {
         "status": "success",
         "recipient": name,
@@ -21,4 +25,5 @@ def create_and_send_welcome_message(name: str) -> Dict[str, Any]:
         "sent_at": "2024-03-19T12:00:00Z"  # Mock timestamp
     }
 
+# Export the decorated function
 notification_tool = create_and_send_welcome_message 

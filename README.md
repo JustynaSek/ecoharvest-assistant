@@ -15,7 +15,7 @@ An AI-powered assistant that provides comprehensive information about EcoHarvest
 
 [![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/JustynaSek86/ecoharvest_assistant)
 
-## Technical Description
+## Space Description
 AI-powered assistant for EcoHarvest products, featuring RAG-based product information, technical support, and automated query routing. Built with Gradio, it provides instant access to product specs, troubleshooting guides, and maintenance procedures.
 
 ## Features
@@ -48,7 +48,7 @@ Here are some example prompts that demonstrate the RAG (Retrieval-Augmented Gene
 ### General Inquiries
 ```
 1. "How do I connect my GrowPod to the mobile app?"
-2. "My name is XYZ, send me a welcome notification."
+2. "What notifications will I receive from the system?"
 ```
 
 Each query is processed through our RAG system, which:
@@ -137,8 +137,6 @@ Note: While `uv` is faster and more modern, we recommend using `pip` for Hugging
 Create a `.env` file in the root directory with the following variables:
 ```
 OPENAI_API_KEY=your_api_key_here
-PUSHOVER_TOKEN=your_pushover_token_here
-PUSHOVER_USER=your_pushover_user_here
 ```
 
 ### Running the Application
@@ -172,6 +170,7 @@ ecoharvest_assistant/
     │   │   └── support_info_guardrail.py   # Support query safety checks
     │   ├── triage_agent/          # Request routing agent
     │   ├── notification_agent/    # Notification handling agent
+    │   └── verify_agents.py       # Agent verification tests
     ├── data/                # Data files and knowledge bases
     ├── tools/               # Utility tools and helpers
     └── gradio_interface.py  # Additional Gradio components
